@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function StepUI({
   title,
@@ -17,7 +17,11 @@ export default function StepUI({
   updateStep: (step: number) => void;
   step?: number;
 }) {
-  const [showStep, setShowStep] = useState(show || false);
+  const [showStep, setShowStep] = useState(false);
+
+  useEffect(() => {
+    setShowStep(show);
+  }, [show]);
 
   return (
     <s-box>
@@ -25,7 +29,6 @@ export default function StepUI({
         <s-checkbox
           label={title}
           checked={checked}
-          disabled={!show}
           onChange={() => updateStep(checked ? step : step + 1)}
         ></s-checkbox>
         <s-button

@@ -136,19 +136,7 @@ export default function QRCodeForm() {
 
   const handleReset = () => {
     setFormState(initialFormState);
-    window.shopify?.saveBar?.hide("qr-code-form");
   };
-
-  useEffect(() => {
-    if (isDirty) {
-      window.shopify?.saveBar?.show("qr-code-form");
-    } else {
-      window.shopify?.saveBar?.hide("qr-code-form");
-    }
-    return () => {
-      window.shopify?.saveBar?.hide("qr-code-form");
-    };
-  }, [isDirty]);
 
   useEffect(() => {
     setInitialFormState(qrCode);
@@ -157,10 +145,10 @@ export default function QRCodeForm() {
 
   return (
     <>
-      <form id="qr-code-form" data-save-bar onSubmit={handleSave} onReset={handleReset}>
+      <form data-save-bar onSubmit={handleSave} onReset={handleReset}>
         <s-page heading={initialFormState.title || "Create QR code"}>
           <s-link
-            href="/app"
+            href="/app/qrcodes"
             slot="breadcrumb-actions"
             onClick={(e) => (isDirty ? e.preventDefault() : navigate("/app/"))}
           >

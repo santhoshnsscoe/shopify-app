@@ -91,6 +91,7 @@ export default function Setups() {
           display={setupData.showSteps ? "auto" : "none"}
         >
           <StepUI
+            key="step1"
             title="Step 1: Setup your store"
             description="Setup your store"
             show={setupData.currentStep === 0 ? true : false}
@@ -100,6 +101,7 @@ export default function Setups() {
           />
           <s-divider></s-divider>
           <StepUI
+            key="step2"
             title="Step 2: Setup your store"
             description="Setup your store"
             show={setupData.currentStep === 1 ? true : false}
@@ -109,6 +111,7 @@ export default function Setups() {
           />
           <s-divider></s-divider>
           <StepUI
+            key="step3"
             title="Step 3: Setup your store"
             description="Setup your store"
             show={setupData.currentStep === 2 ? true : false}
