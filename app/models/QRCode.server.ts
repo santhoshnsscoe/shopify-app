@@ -73,7 +73,6 @@ export const getDestinationUrl = async (qrCode: QRCode) => {
  * @returns Supplemented QR code
  */
 const supplementQRCode = async (qrCode: QRCode, graphql: AdminGraphqlClient) => {
-  const qrCodeImagePromise = getQRCodeImage(qrCode.id);
 
   const response = await graphql(
     `
@@ -107,11 +106,11 @@ const supplementQRCode = async (qrCode: QRCode, graphql: AdminGraphqlClient) => 
   return {
     ...qrCode,
     productDeleted: !product?.title,
-    productTitle: product?.title,
-    productImage: product?.media?.nodes[0]?.preview?.image?.url,
-    productAlt: product?.media?.nodes[0]?.preview?.image?.altText,
+    productTitle: product?.title || "",
+    productImage: product?.media?.nodes[0]?.preview?.image?.url || "",
+    productAlt: product?.media?.nodes[0]?.preview?.image?.altText || "",
     destinationUrl: await getDestinationUrl(qrCode),
-    image: await qrCodeImagePromise,
+    image: await getQRCodeImage(qrCode.id),
   };
 }
 
